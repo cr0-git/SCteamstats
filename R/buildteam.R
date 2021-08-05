@@ -2,7 +2,7 @@
 #'
 #' @param playerlist A list of valid player names
 #' @return Table of player stats
-#'
+#' @export
 #' @examples
 #' buildteam(c("Cr0", "Gladiator"))
 

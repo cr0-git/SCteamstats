@@ -3,7 +3,7 @@
 #' @param teammatrix A matrix of player stats created by buildteam()
 #' @param w TRUE/FALSE for weighting stats by games played
 #' @return Table of average player stats
-#'
+#' @export
 #' @examples
 #' team1 <- buildteam(c("Cr0", "Gladiator"))
 #' avgteam(team1)
