@@ -58,6 +58,8 @@ buildteam <- function(playerlist) {
 
   team_matrix <- team_matrix[- grep("N/A", team_matrix$name),]
 
+  rownames(team_matrix) <- NULL
+
   return(team_matrix)
 
 }
