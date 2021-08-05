@@ -1,0 +1,13 @@
+Package: SCteamstats
+Type: Package
+Title: Tools for comparing teams in SC
+Version: 0.1.0
+Author: Cr0
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+  jsonlite
