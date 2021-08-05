@@ -16,8 +16,8 @@ avgteam <- function(teammatrix, w = FALSE) {
     winratio <- sum(teammatrix$winratio * teammatrix$battles) / sum(teammatrix$battles)
     assists  <- sum(teammatrix$assists  * teammatrix$battles) / sum(teammatrix$battles)
     deaths   <- sum(teammatrix$deaths   * teammatrix$battles) / sum(teammatrix$battles)
-    damage   <- sum(teammatrix$damage   * teammatrix$battles) / sum(teammatrix$battles)
-    healing  <- sum(teammatrix$healing  * teammatrix$battles) / sum(teammatrix$battles)
+    dps      <- sum(teammatrix$dps      * teammatrix$battles) / sum(teammatrix$battles)
+    hps      <- sum(teammatrix$hps      * teammatrix$battles) / sum(teammatrix$battles)
     kills    <- sum(teammatrix$kills    * teammatrix$battles) / sum(teammatrix$battles)
     kdratio  <- sum(teammatrix$kdratio  * teammatrix$battles) / sum(teammatrix$battles)
 
@@ -27,14 +27,14 @@ avgteam <- function(teammatrix, w = FALSE) {
     winratio <- mean(teammatrix$winratio)
     assists  <- mean(teammatrix$assists)
     deaths   <- mean(teammatrix$deaths)
-    damage   <- mean(teammatrix$damage)
-    healing  <- mean(teammatrix$healing)
+    dps     <- mean(teammatrix$dps)
+    hps      <- mean(teammatrix$hps)
     kills    <- mean(teammatrix$kills)
     kdratio  <- mean(teammatrix$kdratio)
 
   }
 
-  avg_matrix <- data.frame(battles, winratio, assists, deaths, damage, healing, kills, kdratio)
+  avg_matrix <- data.frame(battles, winratio, assists, deaths, dps, hps, kills, kdratio)
 
   return(avg_matrix)
 

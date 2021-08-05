@@ -15,56 +15,36 @@ buildteam <- function(playerlist) {
   winratio <- c(1:players)
   assists  <- c(1:players)
   deaths   <- c(1:players)
-  damage   <- c(1:players)
-  healing  <- c(1:players)
+  dps      <- c(1:players)
+  hps      <- c(1:players)
   kills    <- c(1:players)
   kdratio  <- c(1:players)
 
-  team_matrix <- data.frame(name, battles, winratio, assists, deaths, damage, healing, kills)
+  team_matrix <- data.frame(name, battles, winratio, assists, deaths, dps, hps, kills)
 
   for (i in 1:players) {
 
-    url_json <- paste0("https://www.badboytool.com/tool/sc/api.php?nickname=", playerlist[i], "&get=absolute&limit=1")
+    url_json <- paste0("https://gmt.star-conflict.com/pubapi/v1/userinfo.php?nickname=", playerlist[i])
 
     raw_json <- jsonlite::fromJSON(url_json)
 
-    date <- as.Date(raw_json$data$lastCheck) - 1
+    team_matrix$name[i]     <- raw_json$data$nickName
 
-    command <- paste0("raw_json$data$history$absolute$`", date)
+    team_matrix$battles[i]  <- raw_json$data$pvp$gamePlayed
 
-    team_matrix$name[i] <- raw_json$data$nickName
+    team_matrix$winratio[i] <- (raw_json$data$pvp$gameWin) / (raw_json$data$pvp$gamePlayed - raw_json$data$pvp$gameWin)
 
-    team_matrix$battles[i]  <- eval(parse(text = paste0(
-      command, "`$pvp$gamePlayed"
-    )))
+    team_matrix$assists[i]  <- (raw_json$data$pvp$totalAssists) / (raw_json$data$pvp$gamePlayed)
 
-    team_matrix$winratio[i] <- eval(parse(text = paste0(
-      "(", command, "`$pvp$gameWin)/((", command, "`$pvp$gamePlayed)-(", command, "`$pvp$gameWin))"
-    )))
+    team_matrix$deaths[i]   <- (raw_json$data$pvp$totalDeath) / (raw_json$data$pvp$gamePlayed)
 
-    team_matrix$assists[i]  <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalAssists)/(", command, "`$pvp$gamePlayed)"
-    )))
+    team_matrix$dps[i]      <- (raw_json$data$pvp$totalDmgDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
 
-    team_matrix$deaths[i]   <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalDeath)/(", command, "`$pvp$gamePlayed)"
-    )))
+    team_matrix$hps[i]      <- (raw_json$data$pvp$totalHealingDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
 
-    team_matrix$damage[i]   <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalDmgDone)/(", command, "`$pvp$gamePlayed)"
-    )))
+    team_matrix$kills[i]    <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$gamePlayed)
 
-    team_matrix$healing[i]   <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalHealingDone)/(", command, "`$pvp$gamePlayed)"
-    )))
-
-    team_matrix$kills[i]   <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalKill)/(", command, "`$pvp$gamePlayed)"
-    )))
-
-    team_matrix$kdratio[i]   <- eval(parse(text = paste0(
-      "(", command, "`$pvp$totalKill)/(", command, "`$pvp$totalDeath)"
-    )))
+    team_matrix$kdratio[i]  <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$totalDeath)
 
   }
 
