@@ -28,25 +28,35 @@ buildteam <- function(playerlist) {
 
     raw_json <- jsonlite::fromJSON(url_json)
 
-    team_matrix$name[i]     <- raw_json$data$nickName
+    if (raw_json$result == "ok") {
 
-    team_matrix$battles[i]  <- raw_json$data$pvp$gamePlayed
+      team_matrix$name[i]     <- raw_json$data$nickName
 
-    team_matrix$winratio[i] <- (raw_json$data$pvp$gameWin) / (raw_json$data$pvp$gamePlayed - raw_json$data$pvp$gameWin)
+      team_matrix$battles[i]  <- raw_json$data$pvp$gamePlayed
 
-    team_matrix$assists[i]  <- (raw_json$data$pvp$totalAssists) / (raw_json$data$pvp$gamePlayed)
+      team_matrix$winratio[i] <- (raw_json$data$pvp$gameWin) / (raw_json$data$pvp$gamePlayed - raw_json$data$pvp$gameWin)
 
-    team_matrix$deaths[i]   <- (raw_json$data$pvp$totalDeath) / (raw_json$data$pvp$gamePlayed)
+      team_matrix$assists[i]  <- (raw_json$data$pvp$totalAssists) / (raw_json$data$pvp$gamePlayed)
 
-    team_matrix$dps[i]      <- (raw_json$data$pvp$totalDmgDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
+      team_matrix$deaths[i]   <- (raw_json$data$pvp$totalDeath) / (raw_json$data$pvp$gamePlayed)
 
-    team_matrix$hps[i]      <- (raw_json$data$pvp$totalHealingDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
+      team_matrix$dps[i]      <- (raw_json$data$pvp$totalDmgDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
 
-    team_matrix$kills[i]    <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$gamePlayed)
+      team_matrix$hps[i]      <- (raw_json$data$pvp$totalHealingDone) * 1000 / (raw_json$data$pvp$totalBattleTime)
 
-    team_matrix$kdratio[i]  <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$totalDeath)
+      team_matrix$kills[i]    <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$gamePlayed)
+
+      team_matrix$kdratio[i]  <- (raw_json$data$pvp$totalKill) / (raw_json$data$pvp$totalDeath)
+
+    } else {
+
+      team_matrix$name[i]     <- "N/A"
+
+    }
 
   }
+
+  team_matrix <- team_matrix[- grep("N/A", team_matrix$name),]
 
   return(team_matrix)
 
