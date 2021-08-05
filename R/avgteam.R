@@ -27,7 +27,7 @@ avgteam <- function(teammatrix, w = FALSE) {
     winratio <- mean(teammatrix$winratio)
     assists  <- mean(teammatrix$assists)
     deaths   <- mean(teammatrix$deaths)
-    dps     <- mean(teammatrix$dps)
+    dps      <- mean(teammatrix$dps)
     hps      <- mean(teammatrix$hps)
     kills    <- mean(teammatrix$kills)
     kdratio  <- mean(teammatrix$kdratio)
