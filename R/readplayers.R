@@ -8,7 +8,7 @@
 
 readplayers <- function(path) {
 
-  playerlist <- read.table("C:/Users/carlo/Desktop/team.txt")
+  playerlist <- read.table(path)
   playerlist <- as.list(levels(playerlist$V1))
 
   return(playerlist)
