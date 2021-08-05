@@ -3,7 +3,6 @@ Type: Package
 Title: SCteamstats
 Version: 0.1.0
 Author: Cr0
-Maintainer: cr0extraemail@gmail.com
 Description: Tools for comparing teams in SC
 License: What license is it under?
 Encoding: UTF-8
