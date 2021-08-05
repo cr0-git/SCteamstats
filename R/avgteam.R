@@ -1,3 +1,13 @@
+#' Find averages of stats
+#'
+#' @param teammatrix A matrix of player stats created by buildteam()
+#' @param w TRUE/FALSE for weighting stats by games played
+#' @return Table of average player stats
+#'
+#' @examples
+#' team1 <- buildteam(c("Cr0", "Gladiator"))
+#' avgteam(team1)
+
 avgteam <- function(teammatrix, w = FALSE) {
 
   if (isTRUE(w)) {
@@ -24,7 +34,7 @@ avgteam <- function(teammatrix, w = FALSE) {
 
   }
 
-  avg_matrix <- data.frame(battles, winratio, assists, deaths, damage, healing, kills)
+  avg_matrix <- data.frame(battles, winratio, assists, deaths, damage, healing, kills, kdratio)
 
   return(avg_matrix)
 
