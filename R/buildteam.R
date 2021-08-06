@@ -20,7 +20,7 @@ buildteam <- function(playerlist) {
   kills    <- c(1:players)
   kdratio  <- c(1:players)
 
-  team_matrix <- data.frame(name, battles, winratio, assists, deaths, dps, hps, kills)
+  team_matrix <- data.frame(name, battles, winratio, assists, deaths, dps, hps, kills, kdratio)
 
   for (i in 1:players) {
 
