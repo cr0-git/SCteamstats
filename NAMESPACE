@@ -2,5 +2,6 @@
 
 export(avgteam)
 export(bestplayer)
+export(bestteam)
 export(buildteam)
 export(readplayers)
